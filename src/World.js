@@ -9,7 +9,7 @@ export class World {
 
         // Ground
         const geometry = new THREE.PlaneGeometry(20, 1000);
-        const material = new THREE.MeshPhongMaterial({ color: 0x1a1a1a, depthWrite: false });
+        const material = new THREE.MeshPhongMaterial({ color: 0xaaaaaa, depthWrite: false });
         this.ground = new THREE.Mesh(geometry, material);
         this.ground.rotation.x = -Math.PI / 2;
         this.ground.receiveShadow = true;
@@ -24,7 +24,9 @@ export class World {
     }
 
     reset() {
-        this.obstacles.forEach(obs => this.scene.remove(obs));
+        this.obstacles.forEach(obs => {
+            this.scene.remove(obs);
+        });
         this.obstacles = [];
         this.spawnTimer = 0;
     }
@@ -42,8 +44,8 @@ export class World {
             mesh = new THREE.Mesh(geometry, material);
             mesh.position.y = 1.5;
             mesh.userData = { type: 'train' };
-        } else if (type < 0.5) {
-            // Coin (30% chance)
+        } else if (type < 0.7) {
+            // Coin (50% chance)
             const geometry = new THREE.CylinderGeometry(0.5, 0.5, 0.1, 32);
             const material = new THREE.MeshPhongMaterial({ color: 0xffd700 }); // Gold
             mesh = new THREE.Mesh(geometry, material);
@@ -51,7 +53,7 @@ export class World {
             mesh.position.y = 1;
             mesh.userData = { type: 'coin' };
         } else {
-            // Regular Obstacle (50% chance)
+            // Regular Obstacle (30% chance)
             const geometry = new THREE.BoxGeometry(1, 1, 1);
             const material = new THREE.MeshPhongMaterial({ color: 0x00ff00 });
             mesh = new THREE.Mesh(geometry, material);
@@ -107,10 +109,12 @@ export class World {
     }
 
     checkCollision(playerMesh) {
+        playerMesh.updateMatrixWorld(true);
         const playerBox = new THREE.Box3().setFromObject(playerMesh);
 
         for (let i = this.obstacles.length - 1; i >= 0; i--) {
             const obs = this.obstacles[i];
+            obs.updateMatrixWorld(true);
             const obsBox = new THREE.Box3().setFromObject(obs);
 
             if (playerBox.intersectsBox(obsBox)) {

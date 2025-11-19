@@ -102,7 +102,7 @@ export class Game {
     update(dt) {
         if (!this.isPlaying || this.isGameOver) return;
 
-        this.speed += dt * 0.1; // Increase speed over time
+        this.speed += dt * 0.5; // Increase speed over time (5x faster)
         this.score += dt * 10;
         this.scoreElement.innerText = `Score: ${Math.floor(this.score)}`;
 
@@ -111,12 +111,19 @@ export class Game {
 
         // Collision Detection
         const collision = this.world.checkCollision(this.player.mesh);
+
         if (collision === 'hit') {
             this.gameOver();
         } else if (collision === 'coin') {
             this.score += 100;
             this.scoreElement.innerText = `Score: ${Math.floor(this.score)}`;
         }
+    }
+
+    gameOver() {
+        this.isGameOver = true;
+        this.isPlaying = false;
+        this.gameOverElement.classList.remove('hidden');
     }
 
     animate() {

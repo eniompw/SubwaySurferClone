@@ -11,7 +11,7 @@ export class Player {
         // Materials
         const skinMat = new THREE.MeshPhongMaterial({ color: 0xffccaa }); // Skin
         const shirtMat = new THREE.MeshPhongMaterial({ color: 0x3366ff }); // Blue Shirt
-        const pantsMat = new THREE.MeshPhongMaterial({ color: 0x333333 }); // Dark Pants
+        const pantsMat = new THREE.MeshPhongMaterial({ color: 0x1e3c72 }); // Blue Jeans
         const capMat = new THREE.MeshPhongMaterial({ color: 0xff0000 }); // Red Cap
 
         // Body
