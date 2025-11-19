@@ -38,3 +38,16 @@ Run as far as you can while dodging obstacles and collecting coins!
 - [Three.js](https://threejs.org/) - 3D Rendering
 - [Vite](https://vitejs.dev/) - Build Tool
 - Vanilla JavaScript
+
+## 📂 Folder Structure
+
+- **`src/`**: Contains the game logic.
+    - **`main.js`**: Entry point. Initializes the `Game` instance.
+    - **`Game.js`**: Manages the 3D scene, camera, renderer, and the main game loop.
+    - **`Player.js`**: Handles the player character, movement, jumping, and animation.
+    - **`World.js`**: Manages the infinite track, spawning obstacles (trains, boxes), and coins.
+- **`dist/`**: The "Distribution" folder. Contains the optimized, production-ready build of the game (created when you run `npm run build`).
+- **`index.html`**: The main HTML file containing the game canvas container and UI overlays.
+- **`style.css`**: CSS for the UI elements (Start screen, Game Over, Score).
+- **`package.json`**: Project configuration and dependencies.
+
